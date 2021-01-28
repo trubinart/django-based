@@ -1,5 +1,5 @@
 {% extends 'mainapp/base_template.html' %}
-{% load staticfiles %}
+{% load static %}
 
 {% block title %}
     <title>{{ title|title }}</title>
@@ -83,12 +83,12 @@
             </div>
 
             <div class="row">
-            {% for item in products.products %}
+            {% for item in products %}
                 <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
                             <a href="#">
                                 <img class="card-img-top"
-                                     src={% static path_img|add:item.picture %}
+                                     src="/media/{{ item.img }}"
 {#
                                      alt="">
                             </a>
@@ -97,7 +97,7 @@
                                     <a href="#">{{ item.name}}</a>
                                 </h4>
                                 <h5>{{ item.price}} руб.</h5>
-                                <p class="card-text">{{ item.text }}</p>
+                                <p class="card-text">{{ item.short_description }}</p>
                             </div>
                             <div class="card-footer text-center">
                                 <button type="button" class="btn btn-outline-success">Отправить в корзину</button>

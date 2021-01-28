@@ -1,7 +1,7 @@
 from django.shortcuts import render
 import json
 import datetime
-from geekshop import settings
+from .models import Category, Products
 
 # Create your views here.
 def index(request):
@@ -20,7 +20,7 @@ def products(request):
     content = {
         'title': 'GeekShop - Каталог',
         'h1': 'GeekShop',
-        'products': data,
+        'products': Products.objects.all(),
         'path_img': 'vendor/img/products/'
     }
     return render(request,'mainapp/products.html', content)
