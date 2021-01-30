@@ -14,6 +14,9 @@ def index(request):
     return render(request,'mainapp/index.html', content)
 
 def products(request):
+    with open('./mainapp/fixtures/products.json') as poducts:
+        data = json.load(poducts)
+
     content = {
         'title': 'GeekShop - Каталог',
         'h1': 'GeekShop',
