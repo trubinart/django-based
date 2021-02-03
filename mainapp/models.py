@@ -5,6 +5,9 @@ class Category(models.Model):
     name = models.CharField(max_length=100, unique=True, primary_key=True)
     description = models.TextField(max_length=256)
 
+    def __str__(self):
+        return f"{self.name}"
+
 class Products(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField(max_length=256, blank=True)
@@ -14,3 +17,5 @@ class Products(models.Model):
     img = models.ImageField(upload_to='products_images')
     category = models.ForeignKey(Category, on_delete= models.CASCADE)
 
+    def __str__(self):
+        return f"{self.name}"
