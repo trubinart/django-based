@@ -3,7 +3,7 @@ from authapp.forms import UsersLoginForm, UsersRegistration, UsersProfileForm
 from django.contrib import auth
 from django.urls import reverse
 from basketapp.models import Basket
-import functools
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -42,6 +42,7 @@ def register(request):
     }
     return render(request, 'authapp/register.html', content)
 
+@login_required
 def profile(request):
     if request.method == 'POST':
         form = UsersProfileForm(data=request.POST, files=request.FILES, instance=request.user)
@@ -53,7 +54,7 @@ def profile(request):
 
     content = {
         'form': form,
-        'basket': Basket.objects.filter(user=request.user),
+        'baskets': Basket.objects.filter(user=request.user),
     }
     return render(request, 'authapp/profile.html', content)
 

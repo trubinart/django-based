@@ -6,7 +6,7 @@ class Category(models.Model):
     description = models.TextField(max_length=256)
 
     def __str__(self):
-        return f"{self.name}"
+        return {self.name}
 
 class Products(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -18,4 +18,4 @@ class Products(models.Model):
     category = models.ForeignKey(Category, on_delete= models.CASCADE)
 
     def __str__(self):
-        return f"{self.name}"
+        return {self.name}
