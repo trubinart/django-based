@@ -1,7 +1,9 @@
 from django.shortcuts import render, HttpResponseRedirect
-from authapp.forms import UsersLoginForm, UsersRegistration
+from authapp.forms import UsersLoginForm, UsersRegistration, UsersProfileForm
 from django.contrib import auth
 from django.urls import reverse
+from basketapp.models import Basket
+import functools
 
 # Create your views here.
 
@@ -39,3 +41,22 @@ def register(request):
         'form': form
     }
     return render(request, 'authapp/register.html', content)
+
+def profile(request):
+    if request.method == 'POST':
+        form = UsersProfileForm(data=request.POST, files=request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('auth:profile'))
+    else:
+        form = UsersProfileForm(instance=request.user)
+
+    content = {
+        'form': form,
+        'basket': Basket.objects.filter(user=request.user),
+    }
+    return render(request, 'authapp/profile.html', content)
+
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect(reverse('main'))

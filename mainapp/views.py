@@ -1,7 +1,7 @@
 from django.shortcuts import render
 import json
 import datetime
-from .models import Category, Products
+from mainapp.models import Category, Products
 
 # Create your views here.
 def index(request):

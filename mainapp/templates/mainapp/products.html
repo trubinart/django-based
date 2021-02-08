@@ -9,31 +9,6 @@
     <link href="{% static '/css/products.css' %}" rel="stylesheet">
 {% endblock %}
 
-{% block navigation %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="{% url 'main' %}">GeekShop</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'products:index' %}">Каталог</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-shopping-bag"></i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'auth:login'%}">Войти <i class="fas fa-sign-in-alt"></i></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-{% endblock %}
-
 {% block content %}
     <div class="container">
 
@@ -89,8 +64,7 @@
                             <a href="#">
                                 <img class="card-img-top"
                                      src="/media/{{ item.img }}"
-{#
-                                     alt="">
+                                     alt="{{ item.img }}">
                             </a>
                             <div class="card-body">
                                 <h4 class="card-title">
@@ -100,7 +74,10 @@
                                 <p class="card-text">{{ item.short_description }}</p>
                             </div>
                             <div class="card-footer text-center">
-                                <button type="button" class="btn btn-outline-success">Отправить в корзину</button>
+                                <a href="{% url 'basket:basket_add' item.id %}">
+                                    <button type="button" class="btn btn-outline-success">Отправить в корзину</button>
+                                </a>
+
                             </div>
                         </div>
                 </div>
