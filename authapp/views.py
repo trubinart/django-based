@@ -54,7 +54,7 @@ def profile(request):
 
     content = {
         'form': form,
-        'basket': Basket.objects.filter(user=request.user),
+        'baskets': Basket.objects.filter(user=request.user),
     }
     return render(request, 'authapp/profile.html', content)
 

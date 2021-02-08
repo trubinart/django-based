@@ -42,7 +42,7 @@ def basket_edit(request, name, quantity):
     basket_final = Basket.objects.filter(user=request.user)
 
     content = {
-        'basket': basket_final
+        'baskets': basket_final
     }
 
     result = render_to_string('basketapp/basket.html', content)
