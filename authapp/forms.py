@@ -18,7 +18,7 @@ class UsersLoginForm(AuthenticationForm):
 class UsersRegistration(UserCreationForm):
     class Meta:
         model = Users
-        fields = ('first_name', 'last_name', 'age', 'username', 'email', 'password1', 'password2')
+        fields = ('first_name', 'last_name', 'age', 'username', 'email', 'password1', 'password2', 'avatar')
 
     def __init__(self, *args, **kwargs):
         super(UsersRegistration, self).__init__(*args, **kwargs)
@@ -32,12 +32,6 @@ class UsersRegistration(UserCreationForm):
 
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
-
-    def clean_age(self):
-        data = self.cleaned_data['age']
-        if data < 18:
-            raise forms.ValidationError('Вы слишком молоды!')
-        return data
 
 class UsersProfileForm(UserChangeForm):
     avatar = forms.ImageField(widget=forms.FileInput())
