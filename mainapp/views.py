@@ -13,10 +13,11 @@ def index(request):
     }
     return render(request,'mainapp/index.html', content)
 
-def products(request):
+def products(request, category_id=None):
     content = {
         'title': 'GeekShop - Каталог',
         'h1': 'GeekShop',
-        'products': Products.objects.all(),
+        'products': Products.objects.filter(category_id=category_id) if category_id else Products.objects.all(),
+        'categories': Category.objects.all(),
     }
     return render(request,'mainapp/products.html', content)
