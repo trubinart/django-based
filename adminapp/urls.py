@@ -5,8 +5,8 @@ app_name = 'adminapp'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('read/', views.users_read, name='read'),
-    path('create/', views.users_create, name='create'),
-    path('update/<int:id>/', views.users_update, name='update'),
-    path('delete/<int:id>/', views.users_delete, name='delete'),
+    path('read/', views.UsersListView.as_view(), name='read'),
+    path('create/', views.UserCreateView.as_view(), name='create'),
+    path('update/<int:pk>/', views.UserUpdateView.as_view(), name='update'),
+    path('delete/<int:pk>/', views.UserDeleteView.as_view(), name='delete'),
 ]
